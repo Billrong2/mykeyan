@@ -1,30 +1,29 @@
 import base64
 import json
 import os
-
-import requests
-import numpy as np
+import subprocess
+import time
 file = '/workspaces/mykeyan/parsing_target/0.json'
 output_directory = "/workspaces/mykeyan/downloaded_result/0.json"
 f = open(file)
 data= json.load(f)['Single']
 print(len(data))
-#headers = "Authorization: Bearer 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"
-for i in range(5000):
+
+for i in range(len(data)):
     current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
+    my_command = "curl --request GET \--url \"" + current_url+ "\" \\--header \"Authorization: Bearer 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\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
     x=data[i]["FileName"].split('.')
     f_temp = x[-2]+'.'+x[-1]
-    response = requests.get(current_url)
-    commit_data = response.json()
+    response = subprocess.check_output(my_command, shell=True, text=True)
+    commit_data = json.loads(response)
     print(commit_data)
     print("\n")
     #print('RUNNING', a)
-    if response.status_code != 200:
-        data[i]["Complete Source Code"] = "ERROR API REQUEST REJECTED code 403"
-        print("missed")
-    elif response.status_code == 403:
-        print("rate_limit exceeded")
-        break
+    if "message" in commit_data:
+        if "API rate limit exceeded" in commit_data['message']:
+            data[i]["Complete Source Code"] = "ERROR API REQUEST REJECTED code 403"
+            print("rate_limit exceeded")
+            break
     else:
         if "files" in commit_data:
             for j in range(len(commit_data["files"])):
@@ -33,6 +32,7 @@ for i in range(5000):
                 else:
                     pass
         else: pass
+    print(str(i) +"traversal complete")
 temp = 0
 with open(output_directory, 'w') as outfile:
     for i in range(len(data)):
