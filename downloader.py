@@ -11,7 +11,7 @@ print(len(data))
 
 for i in range(len(data)):
     current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
-    my_command = "curl --request GET \--url \"" + current_url+ "\" \\--header \"Authorization: Bearer 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\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
+    my_command = "curl --request GET \--url \"" + current_url+ "\" \\--header \"Authorization: Bearer YOURTOKEN\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
     x=data[i]["FileName"].split('.')
     f_temp = x[-2]+'.'+x[-1]
     response = subprocess.check_output(my_command, shell=True, text=True)
