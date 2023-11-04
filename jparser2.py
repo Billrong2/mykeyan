@@ -15,39 +15,36 @@ dist_ctc = []
 for i in range(177):
     file.append(file_directory + str(i+1)+'.json')
     name.append("V" + str(i+1))
-out_path = output_directory + "result"+ ".json"
 
 out_data = []
 
 b = 0
 a = 0
-with open(out_path, 'w') as outfile:
-    for file_num in range(len(file)):
-        if file_num == 139: # skip V140.json, file not found
-            file_num+=1
-        elif file_num == 169:# skip V170.json, file not found
-            file_num+=1
-        f = open(file[file_num])
-        data_temp = []
-        data_temp= json.load(f)
 
-        b+=1
+for file_num in range(len(file)):
+    if file_num == 139: # skip V140.json, file not found
+        file_num+=1
+    elif file_num == 169:# skip V170.json, file not found
+        file_num+=1
+    f = open(file[file_num])
+    data_temp = []
+    data_temp= json.load(f)
+    b+=1
+    for i in data_temp[name[file_num]]:
+        a+=1
+        if(i['Pattern'] == "Method=>Method"):
+            dist_mtm.append(i)
+        elif(i['Pattern'] == "UNKNOWN=>Try" ):
+            dist_unknownttry.append(i)
+        elif(i['Pattern'] == "UNKNOWN=>If" ):
+            dist_unknowntif.append(i)
+        elif(i['Pattern'] == "UNKNOWN=>Return"):
+            dist_unknowntreturn.append(i)
+        elif(i['Pattern']== "Constructor=>Constructor"):
+            dist_ctc.append(i)
+        else:
+            dist_else.append(i)
 
-        for i in data_temp[name[file_num]]:
-            a+=1
-            if(i['Pattern'] == "Method=>Method"):
-                dist_mtm.append(i)
-            elif(i['Pattern'] == "UNKNOWN=>Try" ):
-                dist_unknownttry.append(i)
-            elif(i['Pattern'] == "UNKNOWN=>If" ):
-                dist_unknowntif.append(i)
-            elif(i['Pattern'] == "UNKNOWN=>Return"):
-                dist_unknowntreturn.append(i)
-            elif(i['Pattern']== "Constructor=>Constructor"):
-                dist_ctc.append(i)
-            else:
-                dist_else.append(i)
-outfile.close()
 print("file # =" + str(b))
 print("Traversed lines =", a)
 
