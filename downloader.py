@@ -8,6 +8,7 @@ output_directory = "/workspaces/mykeyan/downloaded_result/0.json"
 f = open(file)
 data= json.load(f)['Single']
 print(len(data))
+travseled_file = set()
 
 for i in range(len(data)):
     current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
