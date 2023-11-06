@@ -3,7 +3,7 @@ import numpy as np
 import os
 import requests
 import subprocess
-input_file_directory = "/workspaces/mykeyan/downloaded_result/UNKNOWN to Try 2.json"
+input_file_directory = "/workspaces/mykeyan/downloaded_result/UNKNOWN to Try 0.json"
 diff_after = []
 count = 0
 with open(input_file_directory, 'r') as input:
@@ -68,7 +68,7 @@ for d_line in range(len(data)):
         else:
             print("code frag not found \n")
 temp = 0
-with open("/workspaces/mykeyan/Before and After Code/UNKNOWN to Try 2.json", 'w') as outfile:
+with open("/workspaces/mykeyan/Before and After Code/UNKNOWN to Try 0.json", 'w') as outfile:
         for i in range(len(data)):
             temp +=1
             if temp == 1:

@@ -1,15 +1,14 @@
-@@ -39,7 +39,13 @@ protected void onCreate(Bundle savedInstanceState) {
-         imageUri = Uri.parse(getIntent().getStringExtra("imageUri"));
+@@ -330,7 +330,12 @@ private String readLastLines(File file, int lines) {
+ 			int counter = 0;
  
-         ImageView imagePreview =  findViewById(R.id.imagePreview);
--        imagePreview.setImageBitmap(imagePreviewBitmap);
-+
-+        try {
-+            imagePreviewBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-+            imagePreview.setImageBitmap(imagePreviewBitmap);
-+        } catch (IOException e) {
-+            e.printStackTrace();
-+        }
- 
-         Button yesButton = (Button) findViewById(R.id.yesButton);
-         yesButton.setOnClickListener( new View.OnClickListener() {
+ 			while(counter < lines) {
+-				temp = rlfr.readLine();
++				try {
++					temp = rlfr.readLine();
++				} catch (NullPointerException npe) {
++					break;
++				}
++				
+ 				if(temp != null) {
+ 					builder.insert(0, temp + "\n");
+ 					counter++;
