@@ -4,13 +4,13 @@ import os
 import requests
 import subprocess
 import time
-file = '/workspaces/mykeyan/new_pattern/UNKNOWN to Try/UNKNOWN to Try 2.json'
-output_directory = "/workspaces/mykeyan/downloaded_result/UNKNOWN to Try 2.json"
+file = '/workspaces/mykeyan/new_pattern/UNKNOWN to Return/UNKNOWN to Return 0.json'
+output_directory = "/workspaces/mykeyan/downloaded_result/UNKNOWN to Return 0.json"
 f = open(file)
-data = json.load(f)['UNKNOWN to Try']
+data = json.load(f)['UNKNOWN to Return']
 for i in range(len(data)):
     current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
-    my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer Token\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
+    my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer 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\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
     x = data[i]["FileName"].split('.')
     f_temp = x[-2]+'.'+x[-1]
     response = subprocess.check_output(my_command, shell=True, text=True)
