@@ -42,7 +42,7 @@ for file_num, out_file in enumerate(output_directory):
     data = json.load(f)[key_name]
     for i in range(len(data)):
         current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
-        my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer \" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
+        my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer Token\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
         x = data[i]["FileName"].split('.')
         f_temp = x[-2]+'.'+x[-1]
         response = subprocess.check_output(my_command, shell=True, text=True)
