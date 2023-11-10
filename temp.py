@@ -23,6 +23,7 @@ for (root, dirs, file) in os.walk(path):
     for f in file:
         if '.json' in f:
             if f in existing_file:
+                print("skipped file:" + f)
                 continue
             list_inputdirectory.append(root+"/"+f)
             output_directory.append(output_path+"/"+f)
@@ -35,16 +36,13 @@ for file_num, out_file in enumerate(output_directory):
         key_name = "UNKNOWN to Try"
     elif "Constructor to Constructor" in out_file:
         key_name = "Constructor to Constructor"
-    # print(file_num)
-    # print(key_name)
-    # print(list_inputdirectory[file_num])
-    # print(out_file)
+
     input_files = list_inputdirectory[file_num]
     f = open(input_files)
     data = json.load(f)[key_name]
     for i in range(len(data)):
         current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
-        my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer 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\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
+        my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer \" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
         x = data[i]["FileName"].split('.')
         f_temp = x[-2]+'.'+x[-1]
         response = subprocess.check_output(my_command, shell=True, text=True)
