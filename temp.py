@@ -37,7 +37,7 @@ for file_num, out_file in enumerate(output_directory):
     elif "Constructor to Constructor" in out_file:
         key_name = "Constructor to Constructor"
     elif "Method to Method" in out_file:
-        key_name = "Method to Method"
+        key_name = "Method=>Method"
 
     input_files = list_inputdirectory[file_num]
     f = open(input_files)
