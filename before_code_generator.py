@@ -23,6 +23,8 @@ for file_num, out_file in enumerate(output_directory):
         key_name = "UNKNOWN to Try"
     elif "Constructor to Constructor" in out_file:
         key_name = "Constructor to Constructor"
+    elif "Method to Method" in out_file:
+        key_name = "Method=>Method"
     input_file_directory = list_inputdirectory[file_num]
     list = []
     wasted = 0
@@ -168,4 +170,5 @@ for file_num, out_file in enumerate(output_directory):
             else:
                 outfile.write(json.dumps(data_out[i]) + ",\n")
     print("Total testcases collected" + str(count - waste))
+    print("Total testcases go through" + str(count))
     print("Total invalid datapoint" + str(waste))
