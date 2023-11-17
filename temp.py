@@ -15,10 +15,8 @@ for (root, dirs, file) in os.walk(existing_path):
 path = "/workspaces/mykeyan/new_pattern/"
 output_path = "/workspaces/mykeyan/downloaded_result"
 output_directory =  []
-# to store files in a list
 list_inputdirectory = []
  
-# dirs=directories
 for (root, dirs, file) in os.walk(path):
     for f in file:
         if '.json' in f:
@@ -38,13 +36,12 @@ for file_num, out_file in enumerate(output_directory):
         key_name = "Constructor to Constructor"
     elif "Method to Method" in out_file:
         key_name = "Method=>Method"
-
     input_files = list_inputdirectory[file_num]
     f = open(input_files)
     data = json.load(f)[key_name]
     for i in range(len(data)):
         current_url = data[i]['Url']+"/commits/" + data[i]['Fixed commit']
-        my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer Token\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
+        my_command = "curl --request GET \--url \"" + current_url + "\" \\--header \"Authorization: Bearer TOKEN\" \\--header \"X-GitHub-Api-Version: 2022-11-28\" "
         x = data[i]["FileName"].split('.')
         f_temp = x[-2]+'.'+x[-1]
         response = subprocess.check_output(my_command, shell=True, text=True)
@@ -55,6 +52,7 @@ for file_num, out_file in enumerate(output_directory):
                     if("patch" in commit_data["files"][j]):
                         data[i]["Source Code Diff"] = commit_data["files"][j]["patch"]
                         raw_url = commit_data["files"][j]["raw_url"]
+                        print("source code diff collect successful!")
                     else:
                         continue
                 else:
@@ -63,12 +61,13 @@ for file_num, out_file in enumerate(output_directory):
             response_data = response.text
             if response.status_code == 200:
                 data[i]["Complete After Code"] = response_data
+                print("Complete After Code collect successful!")
             else:
                 data[i]["Complete After Code"] = "Missing Raw Link for After Code"
         else:
             pass
         print(str(i) +"traversal complete \n")
-        time.sleep(0.5)
+        time.sleep(0.2)
     temp = 0
     a = 0
     with open(out_file, 'w') as outfile:
