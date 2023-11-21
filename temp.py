@@ -5,15 +5,15 @@ import requests
 import subprocess
 import time
 # This is my path
-existing_path = "/workspaces/mykeyan/downloaded_result"
+existing_path = "/Users/xiaokairong/Desktop/mykeyan/downloaded_result"
 existing_file = []
 for (root, dirs, file) in os.walk(existing_path):
     for f in file:
         if '.json' in f:
             existing_file.append(f)
 
-path = "/workspaces/mykeyan/new_pattern/"
-output_path = "/workspaces/mykeyan/downloaded_result"
+path = "/Users/xiaokairong/Desktop/mykeyan/new_pattern/"
+output_path = "/Users/xiaokairong/Desktop/mykeyan/downloaded_result"
 output_directory =  []
 list_inputdirectory = []
  
