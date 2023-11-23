@@ -2,7 +2,7 @@ import os
 import numpy as np
 import json
 path = "/workspaces/mykeyan/downloaded_result"
-output_path = "//workspaces/mykeyan/Before and After Code"
+output_path = "/workspaces/mykeyan/Before and After Code"
 output_directory =  []
 # to store files in a list
 list_inputdirectory = []
@@ -25,6 +25,8 @@ for file_num, out_file in enumerate(output_directory):
         key_name = "Constructor to Constructor"
     elif "Method to Method" in out_file:
         key_name = "Method=>Method"
+    elif "Constructor to Constructor" in out_file:
+        key_name = "Constructor to Constructor"
     input_file_directory = list_inputdirectory[file_num]
     list = []
     wasted = 0
