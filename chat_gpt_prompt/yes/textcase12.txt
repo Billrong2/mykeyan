@@ -1,0 +1,62 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package com.ghlh.autotrade;
+Line 1:
+Line 2:import java.util.List;
+Line 3:
+Line 4:import org.apache.log4j.Logger;
+Line 5:
+Line 6:import com.ghlh.data.db.MonitorstockDAO;
+Line 7:import com.ghlh.data.db.MonitorstockVO;
+Line 8:import com.ghlh.strategy.OneTimeStrategy;
+Line 9:import com.ghlh.util.ReflectUtil;
+Line 10:import com.ghlh.util.StockMarketUtil;
+Line 11:
+Line 12:public class OneTimeJobUtil {
+Line 13:	private static Logger logger = Logger.getLogger(OneTimeJobUtil.class);
+Line 14:
+Line 15:	public static void processOneTimeStrategy(String oneTimeType) {
+Line 16:		List monitorStocksList = MonitorstockDAO.getMonitorStock();
+Line 17:		for (int i = 0; i < monitorStocksList.size(); i++) {
+Line 18:			try {
+Line 19:				MonitorstockVO monitorstockVO = (MonitorstockVO) monitorStocksList
+Line 20:						.get(i);
+Line 21:				OneTimeStrategy ts = (OneTimeStrategy) ReflectUtil
+Line 22:						.getClassInstance("com.ghlh.strategy",
+Line 23:								monitorstockVO.getTradealgorithm(), oneTimeType);
+Line 24:				ts.processStockTrade(monitorstockVO);
+Line 25:			} catch (Exception ex) {
+Line 26:				logger.error("processOneTimeStrategy ", ex);
+Line 27:			}
+Line 28:		}
+Line 29:	}
+Line 30:
+Line 31:}
+Buggy Version
+Line 0:package com.ghlh.autotrade;
+Line 1:
+Line 2:import java.util.List;
+Line 3:
+Line 4:import com.ghlh.data.db.MonitorstockDAO;
+Line 5:import com.ghlh.data.db.MonitorstockVO;
+Line 6:import com.ghlh.strategy.OneTimeStrategy;
+Line 7:import com.ghlh.util.ReflectUtil;
+Line 8:import com.ghlh.util.StockMarketUtil;
+Line 9:
+Line 10:public class OneTimeJobUtil {
+Line 11:
+Line 12:	public static void processOneTimeStrategy(String oneTimeType) {
+Line 13:		List monitorStocksList = MonitorstockDAO.getMonitorStock();
+Line 14:		for (int i = 0; i < monitorStocksList.size(); i++) {
+Line 15:			MonitorstockVO monitorstockVO = (MonitorstockVO) monitorStocksList
+Line 16:					.get(i);
+Line 17:			OneTimeStrategy ts = (OneTimeStrategy) ReflectUtil
+Line 18:					.getClassInstance("com.ghlh.strategy",
+Line 19:							monitorstockVO.getTradealgorithm(), oneTimeType);
+Line 20:			ts.processStockTrade(monitorstockVO);
+Line 21:		}
+Line 22:	}
+Line 23:
+Line 24:}

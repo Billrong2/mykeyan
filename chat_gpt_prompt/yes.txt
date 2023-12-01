@@ -1,0 +1,30 @@
+case0   =>15
+=>try { return rst.getObject(columnIndex); } catch (java.sql.SQLException e) { try { return rst.getString(columnIndex); } catch (java.sql.SQLException e2) { throw e; } }
+case1   =>11
+=>try { java.lang.Class.forName("com.mysql.jdbc.Driver").newInstance(); } catch (java.lang.Exception ex) { java.lang.System.out.println(ex.getMessage()); }
+case2   =>19
+=>try { final java.util.List result = com.jayway.jsonpath.JsonPath.parse(realRequest.getBody()).read(jsonPath, java.util.List.class); return (result.size()) != 0; } catch (java.lang.Exception e) { return false; }
+case3   =>31
+=>try { java.lang.Thread.sleep(250); } catch (java.lang.InterruptedException e) { e.printStackTrace(); }
+case4   =>23
+=>try { compliant = (_value.getBytes().length) <= 127; } catch (java.lang.StackOverflowError e) { compliant = false; }
+case5   =>18
+=>try { startActivity(intent(com.example.damian.projektgrupowy.view.activity.PhoneActivity.class)); java.lang.Thread.sleep(5000); finish(); } catch (java.lang.InterruptedException e) { e.printStackTrace(); }
+case6   =>13
+=>try { if ((((event.getBlock().getType().equals(Material.STEP)) | (event.getBlock().getType().equals(Material.WOOD_STEP))) | (event.getBlock().getType().equals(Material.STONE_SLAB2))) | (event.getBlock().getType().equals(Material.PURPUR_SLAB))) { if ((event.getItemInHand().getItemMeta().getDisplayName().hashCode()) == ("Upside down slab".hashCode())) { if ((event.getBlockReplacedState().getType()) != (event.getBlockPlaced().getType())) { event.getBlock().getState().getBlock().setData(((byte) ((event.getItemInHand().getData().getData()) + 8))); } } } } catch (java.lang.Exception e) { }
+case7   =>23
+=>try { this.command = w094j.ctrl8.statement.HelpStatement.commandParser.parse(this.getStatementArgumentsOnly()); } catch (w094j.ctrl8.exception.ParseException e) { this.command = CommandType.HELP; }
+case8   =>12
+=>try { eu.sqooss.core.AlitheiaCore core = eu.sqooss.core.AlitheiaCore.getInstance(); if (core != null) { core.registerService(gr.tracer.platform.TracerPlatformService.class, gr.tracer.platform.TracerPlatformServiceImpl.class); } } catch (java.lang.Exception e) { java.lang.System.err.println(e); }
+case9   =>27
+=>try { rv = item.getUnlocalizedName().contains("tile.blockMagicalLeaves"); } catch (java.lang.NullPointerException e) { ProgressiveAutomation.logger.warn("NullPointerException caught while calling ItemStack.getUnlocalizedName()"); }
+case10   =>13
+=>try { com.google.firebase.FirebaseApp.getInstance(); } catch (java.lang.IllegalStateException e) { return; }
+case11   =>21
+=>try { operation.run(index, source); } finally { if (0 == (sync.decrementAndGet())) { synchronized(sync) { sync.notify(); } } }
+case12   =>19
+=>try { com.ghlh.data.db.MonitorstockVO monitorstockVO = ((com.ghlh.data.db.MonitorstockVO) (monitorStocksList.get(i))); com.ghlh.strategy.OneTimeStrategy ts = ((com.ghlh.strategy.OneTimeStrategy) (com.ghlh.util.ReflectUtil.getClassInstance("com.ghlh.strategy", monitorstockVO.getTradealgorithm(), oneTimeType))); ts.processStockTrade(monitorstockVO); } catch (java.lang.Exception ex) { com.ghlh.autotrade.OneTimeJobUtil.logger.error("processOneTimeStrategy ", ex); }
+case13   =>12
+=>try { pneumaticCraft.common.AchievementHandler.giveAchievement(event.player, event.crafting); } catch (java.lang.Throwable e) { }
+case14   =>22
+=>try { retrofit.RestAdapter restAdapter = new retrofit.RestAdapter.Builder().setEndpoint(mContext.getString(R.string.api_url)).build(); com.walmartlabs.productlist.api.FeedDataInterface feedDataInterface = restAdapter.create(com.walmartlabs.productlist.api.FeedDataInterface.class); response = feedDataInterface.getProductList(pageNumber, pageSize); } catch (java.lang.Exception e) { }

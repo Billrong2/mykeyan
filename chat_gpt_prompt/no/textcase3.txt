@@ -1,0 +1,62 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package com.espian.showcaseview.targets;
+Line 1:
+Line 2:import android.app.Activity;
+Line 3:import android.graphics.Point;
+Line 4:import android.view.View;
+Line 5:
+Line 6:public class ViewTarget implements Target {
+Line 7:
+Line 8:    private final View mView;
+Line 9:
+Line 10:    public ViewTarget(View view) {
+Line 11:        mView = view;
+Line 12:    }
+Line 13:
+Line 14:    public ViewTarget(int viewId, Activity activity) {
+Line 15:        mView = activity.findViewById(viewId);
+Line 16:    }
+Line 17:
+Line 18:    @Override
+Line 19:    public Point getPoint() {
+Line 20:        int[] location = new int[2];
+Line 21:        if(mView != null) {
+Line 22:            mView.getLocationInWindow(location);
+Line 23:            int x = location[0] + mView.getWidth() / 2;
+Line 24:            int y = location[1] + mView.getHeight() / 2;
+Line 25:            return new Point(x, y);
+Line 26:        }
+Line 27:
+Line 28:        return null;
+Line 29:    }
+Line 30:}
+Buggy Version
+Line 0:package com.espian.showcaseview.targets;
+Line 1:
+Line 2:import android.app.Activity;
+Line 3:import android.graphics.Point;
+Line 4:import android.view.View;
+Line 5:
+Line 6:public class ViewTarget implements Target {
+Line 7:
+Line 8:    private final View mView;
+Line 9:
+Line 10:    public ViewTarget(View view) {
+Line 11:        mView = view;
+Line 12:    }
+Line 13:
+Line 14:    public ViewTarget(int viewId, Activity activity) {
+Line 15:        mView = activity.findViewById(viewId);
+Line 16:    }
+Line 17:
+Line 18:    @Override
+Line 19:    public Point getPoint() {
+Line 20:        int[] location = new int[2];
+Line 21:        mView.getLocationInWindow(location);
+Line 22:        int x = location[0] + mView.getWidth() / 2;
+Line 23:        int y = location[1] + mView.getHeight() / 2;
+Line 24:        return new Point(x, y);
+Line 25:    }
+Line 26:}

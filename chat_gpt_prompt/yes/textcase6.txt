@@ -1,0 +1,53 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package chibill.slabs.slabs;
+Line 1:
+Line 2:import org.bukkit.Material;
+Line 3:import org.bukkit.event.EventHandler;
+Line 4:import org.bukkit.event.Listener;
+Line 5:import org.bukkit.event.block.BlockPlaceEvent;
+Line 6:
+Line 7:public class SlabEventHandler  implements Listener {
+Line 8:	
+Line 9:	
+Line 10:	@EventHandler
+Line 11:	public void onBlockPlace(BlockPlaceEvent event){
+Line 12:		try{
+Line 13:		if(event.getBlock().getType().equals(Material.STEP) | event.getBlock().getType().equals(Material.WOOD_STEP) | event.getBlock().getType().equals(Material.STONE_SLAB2)| event.getBlock().getType().equals(Material.PURPUR_SLAB)){
+Line 14:			
+Line 15:			if((event.getItemInHand().getItemMeta().getDisplayName().hashCode() == "Upside down slab".hashCode())){
+Line 16:				if(event.getBlockReplacedState().getType() != event.getBlockPlaced().getType()){
+Line 17:				event.getBlock().getState().getBlock().setData((byte)(event.getItemInHand().getData().getData()+ 8));
+Line 18:			}}
+Line 19:		}catch(Exception e){}
+Line 20:		
+Line 21:	}
+Line 22:	
+Line 23:}
+Buggy Version
+Line 0:package chibill.slabs.slabs;
+Line 1:
+Line 2:import org.bukkit.Material;
+Line 3:import org.bukkit.event.EventHandler;
+Line 4:import org.bukkit.event.Listener;
+Line 5:import org.bukkit.event.block.BlockPlaceEvent;
+Line 6:
+Line 7:public class SlabEventHandler  implements Listener {
+Line 8:	
+Line 9:	
+Line 10:	@EventHandler
+Line 11:	public void onBlockPlace(BlockPlaceEvent event){
+Line 12:		
+Line 13:		if(event.getBlock().getType().equals(Material.STEP) | event.getBlock().getType().equals(Material.WOOD_STEP) | event.getBlock().getType().equals(Material.STONE_SLAB2)| event.getBlock().getType().equals(Material.PURPUR_SLAB)){
+Line 14:			
+Line 15:			if((event.getItemInHand().getItemMeta().getDisplayName().hashCode() == "Upside down slab".hashCode())){
+Line 16:				if(event.getBlockReplacedState().getType() != event.getBlockPlaced().getType()){
+Line 17:				event.getBlock().getState().getBlock().setData((byte)(event.getItemInHand().getData().getData()+ 8));
+Line 18:			}}
+Line 19:		}
+Line 20:		
+Line 21:	}
+Line 22:	
+Line 23:}

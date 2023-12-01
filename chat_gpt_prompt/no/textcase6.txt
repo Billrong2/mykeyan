@@ -1,0 +1,62 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package com.capgemini.bike.service;
+Line 1:
+Line 2:import com.capgemini.bike.domain.Person;
+Line 3:import com.capgemini.bike.repositories.PersonRepository;
+Line 4:import org.springframework.beans.factory.annotation.Autowired;
+Line 5:import org.springframework.stereotype.Service;
+Line 6:import org.springframework.transaction.annotation.Transactional;
+Line 7:
+Line 8:@Service
+Line 9:public class PersonService {
+Line 10:
+Line 11:    @Autowired
+Line 12:    private PersonRepository personRepository;
+Line 13:
+Line 14:    @Transactional
+Line 15:    public Person createPerson(Person newPerson) {
+Line 16:        return this.personRepository.save(newPerson);
+Line 17:    }
+Line 18:
+Line 19:    @Transactional
+Line 20:    public boolean maakGeldOver(Person sasha, Person richard, double bedrag) {
+Line 21:
+Line 22:                sasha.verlaag(bedrag);
+Line 23:                richard.verhoog(bedrag);
+Line 24:
+Line 25:                return true;
+Line 26:
+Line 27:
+Line 28:    }
+Line 29:}
+Buggy Version
+Line 0:package com.capgemini.bike.service;
+Line 1:
+Line 2:import com.capgemini.bike.domain.Person;
+Line 3:import com.capgemini.bike.repositories.PersonRepository;
+Line 4:import org.springframework.beans.factory.annotation.Autowired;
+Line 5:import org.springframework.stereotype.Service;
+Line 6:import org.springframework.transaction.annotation.Transactional;
+Line 7:
+Line 8:@Service
+Line 9:public class PersonService {
+Line 10:
+Line 11:    @Autowired
+Line 12:    private PersonRepository personRepository;
+Line 13:
+Line 14:    @Transactional
+Line 15:    public Person createPerson(Person newPerson) {
+Line 16:        return this.personRepository.save(newPerson);
+Line 17:    }
+Line 18:
+Line 19:    @Transactional
+Line 20:    public boolean maakGeldOver(Person sasha, Person richard, double bedrag) {
+Line 21:
+Line 22:                sasha.verlaag(bedrag);
+Line 23:                richard.verhoog(bedrag);
+Line 24:
+Line 25:
+Line 26:    }
+Line 27:}

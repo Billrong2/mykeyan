@@ -1,0 +1,57 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package org.mule.tooling.lang.dw;
+Line 1:
+Line 2:
+Line 3:import com.intellij.extapi.psi.PsiFileBase;
+Line 4:import com.intellij.openapi.fileTypes.FileType;
+Line 5:import com.intellij.psi.FileViewProvider;
+Line 6:import org.jetbrains.annotations.NotNull;
+Line 7:import org.mule.tooling.lang.dw.parser.psi.WeaveDocument;
+Line 8:
+Line 9:public class WeaveFile extends PsiFileBase {
+Line 10:    public WeaveFile(@NotNull FileViewProvider viewProvider) {
+Line 11:        super(viewProvider, WeaveLanguage.getInstance());
+Line 12:    }
+Line 13:
+Line 14:    @NotNull
+Line 15:    @Override
+Line 16:    public FileType getFileType() {
+Line 17:        return WeaveFileType.getInstance();
+Line 18:    }
+Line 19:
+Line 20:    public WeaveDocument getDocument() {
+Line 21:        WeaveDocument document = null;
+Line 22:        if (getChildren().length > 0 && getChildren()[0] instanceof WeaveDocument)
+Line 23:            document = (WeaveDocument) getChildren()[0];
+Line 24:        return document;
+Line 25:    }
+Line 26:
+Line 27:}
+Buggy Version
+Line 0:package org.mule.tooling.lang.dw;
+Line 1:
+Line 2:
+Line 3:import com.intellij.extapi.psi.PsiFileBase;
+Line 4:import com.intellij.openapi.fileTypes.FileType;
+Line 5:import com.intellij.psi.FileViewProvider;
+Line 6:import org.jetbrains.annotations.NotNull;
+Line 7:import org.mule.tooling.lang.dw.parser.psi.WeaveDocument;
+Line 8:
+Line 9:public class WeaveFile extends PsiFileBase {
+Line 10:    public WeaveFile(@NotNull FileViewProvider viewProvider) {
+Line 11:        super(viewProvider, WeaveLanguage.getInstance());
+Line 12:    }
+Line 13:
+Line 14:    @NotNull
+Line 15:    @Override
+Line 16:    public FileType getFileType() {
+Line 17:        return WeaveFileType.getInstance();
+Line 18:    }
+Line 19:
+Line 20:    public WeaveDocument getDocument() {
+Line 21:        return getChildren().length > 0 ? (WeaveDocument) getChildren()[0] : null;
+Line 22:    }
+Line 23:
+Line 24:}

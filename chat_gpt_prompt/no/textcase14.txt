@@ -1,0 +1,67 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package com.hotelres;
+Line 1:
+Line 2:public class AccountController {
+Line 3:
+Line 4:    private Account model;
+Line 5:    private AccountView view;
+Line 6:
+Line 7:    public AccountController(Account model, AccountView view) {
+Line 8:        this.model = model;
+Line 9:        this.view = view;
+Line 10:    }
+Line 11:
+Line 12:    public void updateView() {
+Line 13:
+Line 14:    }
+Line 15:
+Line 16:    public String getName(){
+Line 17:        return "";
+Line 18:    }
+Line 19:
+Line 20:    public void setName(String newName) {
+Line 21:
+Line 22:    }
+Line 23:
+Line 24:    public String getPassword() {
+Line 25:        return "";
+Line 26:    }
+Line 27:
+Line 28:    public void setPassword(String newPassword) {
+Line 29:
+Line 30:    }
+Line 31:}Buggy Version
+Line 32:package com.hotelres;
+Line 33:
+Line 34:public class AccountController {
+Line 35:
+Line 36:    private Account model;
+Line 37:    private AccountView view;
+Line 38:
+Line 39:    public AccountController(Account model, AccountView view) {
+Line 40:        this.model = model;
+Line 41:        this.view = view;
+Line 42:    }
+Line 43:
+Line 44:    public void updateView() {
+Line 45:
+Line 46:    }
+Line 47:
+Line 48:    public String getName(){
+Line 49:
+Line 50:    }
+Line 51:
+Line 52:    public void setName(String newName) {
+Line 53:
+Line 54:    }
+Line 55:
+Line 56:    public String getPassword() {
+Line 57:
+Line 58:    }
+Line 59:
+Line 60:    public void setPassword(String newPassword) {
+Line 61:
+Line 62:    }
+Line 63:}

@@ -1,0 +1,33 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package io.prismic;
+Line 1:
+Line 2:/**
+Line 3: * @deprecated as of 2.0 {@link LinkResolver} has default methods (made
+Line 4: * possible by a Java 8 baseline) and can be implemented directly without the
+Line 5: * need for this adapter
+Line 6: */
+Line 7:@Deprecated
+Line 8:public abstract class SimpleLinkResolver implements LinkResolver {
+Line 9:
+Line 10:  public abstract String resolve(Fragment.DocumentLink link);
+Line 11:
+Line 12:  @Override
+Line 13:  public String resolve(Document document) {
+Line 14:    return resolve(document.asDocumentLink());
+Line 15:  }
+Line 16:
+Line 17:}
+Buggy Version
+Line 0:package io.prismic;
+Line 1:
+Line 2:public abstract class SimpleLinkResolver implements LinkResolver {
+Line 3:
+Line 4:  public abstract String resolve(Fragment.DocumentLink link);
+Line 5:
+Line 6:  public String resolve(Document document) {
+Line 7:    return resolve(document.asDocumentLink());
+Line 8:  }
+Line 9:
+Line 10:}

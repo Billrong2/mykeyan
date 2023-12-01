@@ -1,0 +1,48 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package railo.runtime.query.caster;
+Line 1:
+Line 2:import java.sql.ResultSet;
+Line 3:import java.sql.SQLException;
+Line 4:import java.sql.Types;
+Line 5:
+Line 6:public class OtherCast implements Cast {
+Line 7:
+Line 8:
+Line 9:	@Override
+Line 10:	public Object toCFType(int type, ResultSet rst, int columnIndex) throws SQLException {
+Line 11:		if(type!=Types.SMALLINT) return rst.getObject(columnIndex);
+Line 12:		
+Line 13:		
+Line 14:		try{
+Line 15:			return rst.getObject(columnIndex);
+Line 16:		}
+Line 17:		// workaround for MSSQL Driver, in some situation getObject throws a cast exception using getString avoids this
+Line 18:		catch(SQLException e){
+Line 19:			try{
+Line 20:				return rst.getString(columnIndex);
+Line 21:			}
+Line 22:			catch(SQLException e2){
+Line 23:				throw e;
+Line 24:			}
+Line 25:		}
+Line 26:	}
+Line 27:
+Line 28:}
+Buggy Version
+Line 0:package railo.runtime.query.caster;
+Line 1:
+Line 2:import java.sql.ResultSet;
+Line 3:import java.sql.SQLException;
+Line 4:
+Line 5:public class OtherCast implements Cast {
+Line 6:
+Line 7:
+Line 8:	@Override
+Line 9:	public Object toCFType(int type, ResultSet rst, int columnIndex) throws SQLException {
+Line 10:		return rst.getObject(columnIndex);
+Line 11:	}
+Line 12:
+Line 13:}

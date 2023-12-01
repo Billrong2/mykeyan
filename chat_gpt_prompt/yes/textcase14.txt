@@ -1,0 +1,61 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package com.walmartlabs.productlist.api;
+Line 1:
+Line 2:import android.content.Context;
+Line 3:
+Line 4:import com.walmartlabs.productlist.R;
+Line 5:import com.walmartlabs.productlist.bean.ProductBeanResponse;
+Line 6:
+Line 7:import retrofit.RestAdapter;
+Line 8:import retrofit.http.Path;
+Line 9:
+Line 10:public class FeedDataAPI implements FeedDataInterface{
+Line 11:
+Line 12:    private Context mContext;
+Line 13:
+Line 14:    public FeedDataAPI(Context context) {
+Line 15:        mContext = context;
+Line 16:    }
+Line 17:
+Line 18:    @Override
+Line 19:    public ProductBeanResponse getProductList(@Path("pageNumber") int pageNumber, @Path("pageSize") int pageSize) {
+Line 20:        ProductBeanResponse response = null;
+Line 21:        try {
+Line 22:            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(mContext.getString(R.string.api_url)).build();
+Line 23:            FeedDataInterface feedDataInterface = restAdapter.create(FeedDataInterface.class);
+Line 24:            response = feedDataInterface.getProductList(pageNumber, pageSize);
+Line 25:        } catch (Exception e) {
+Line 26:            //Log in Crashlytics
+Line 27:        }
+Line 28:        return response;
+Line 29:    }
+Line 30:}
+Buggy Version
+Line 0:package com.walmartlabs.productlist.api;
+Line 1:
+Line 2:import android.content.Context;
+Line 3:
+Line 4:import com.walmartlabs.productlist.R;
+Line 5:import com.walmartlabs.productlist.bean.ProductBeanResponse;
+Line 6:
+Line 7:import retrofit.RestAdapter;
+Line 8:import retrofit.http.Path;
+Line 9:
+Line 10:public class FeedDataAPI implements FeedDataInterface{
+Line 11:
+Line 12:    private Context mContext;
+Line 13:
+Line 14:    public FeedDataAPI(Context context) {
+Line 15:        mContext = context;
+Line 16:    }
+Line 17:
+Line 18:    @Override
+Line 19:    public ProductBeanResponse getProductList(@Path("pageNumber") int pageNumber, @Path("pageSize") int pageSize) {
+Line 20:        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(mContext.getString(R.string.api_url)).build();
+Line 21:        FeedDataInterface feedDataInterface = restAdapter.create(FeedDataInterface.class);
+Line 22:        return feedDataInterface.getProductList(pageNumber, pageSize);
+Line 23:    }
+Line 24:}

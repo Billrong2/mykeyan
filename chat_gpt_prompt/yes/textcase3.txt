@@ -1,0 +1,79 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package caris.framework.basereactions;
+Line 1:
+Line 2:import java.util.ArrayList;
+Line 3:
+Line 4:public class MultiReaction extends Reaction {
+Line 5:
+Line 6:	public ArrayList<Reaction> reactions;
+Line 7:	
+Line 8:	public MultiReaction() {
+Line 9:		this(1);
+Line 10:	}
+Line 11:	
+Line 12:	public MultiReaction(int priority) {
+Line 13:		super(priority);
+Line 14:		reactions = new ArrayList<Reaction>();
+Line 15:	}
+Line 16:	
+Line 17:	public MultiReaction(ArrayList<Reaction> reactions) {
+Line 18:		this(reactions, 1);
+Line 19:	}
+Line 20:	
+Line 21:	public MultiReaction(ArrayList<Reaction> reactions, int priority) {
+Line 22:		super(priority);
+Line 23:		this.reactions = reactions;
+Line 24:	}
+Line 25:	
+Line 26:	@Override
+Line 27:	public void run() {
+Line 28:		for( Reaction reaction : reactions ) {
+Line 29:			reaction.run();
+Line 30:			try {
+Line 31:				Thread.sleep(250);
+Line 32:			} catch (InterruptedException e) {
+Line 33:				// TODO Auto-generated catch block
+Line 34:				e.printStackTrace();
+Line 35:			}
+Line 36:		}
+Line 37:	}
+Line 38:	
+Line 39:}
+Buggy Version
+Line 0:package caris.framework.basereactions;
+Line 1:
+Line 2:import java.util.ArrayList;
+Line 3:
+Line 4:public class MultiReaction extends Reaction {
+Line 5:
+Line 6:	public ArrayList<Reaction> reactions;
+Line 7:	
+Line 8:	public MultiReaction() {
+Line 9:		this(1);
+Line 10:	}
+Line 11:	
+Line 12:	public MultiReaction(int priority) {
+Line 13:		super(priority);
+Line 14:		reactions = new ArrayList<Reaction>();
+Line 15:	}
+Line 16:	
+Line 17:	public MultiReaction(ArrayList<Reaction> reactions) {
+Line 18:		this(reactions, 1);
+Line 19:	}
+Line 20:	
+Line 21:	public MultiReaction(ArrayList<Reaction> reactions, int priority) {
+Line 22:		super(priority);
+Line 23:		this.reactions = reactions;
+Line 24:	}
+Line 25:	
+Line 26:	@Override
+Line 27:	public void run() {
+Line 28:		for( Reaction reaction : reactions ) {
+Line 29:			reaction.run();
+Line 30:		}
+Line 31:	}
+Line 32:	
+Line 33:}

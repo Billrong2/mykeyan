@@ -1,0 +1,93 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package WPI.CampusMap.AStar;
+Line 1:
+Line 2:public class Coord {
+Line 3:	private float x;
+Line 4:	private float y;
+Line 5:
+Line 6:	public Coord(float x, float y) {
+Line 7:		this.x = x;
+Line 8:		this.y = y;
+Line 9:	}
+Line 10:
+Line 11:	public float distance(Coord other) {
+Line 12:		return Math.abs(
+Line 13:				(float) (Math.sqrt(Math.pow(2, other.getY() + this.getY()) + Math.pow(2, other.getX() + this.getX()))));
+Line 14:
+Line 15:	}
+Line 16:
+Line 17:	public float getX() {
+Line 18:		return x;
+Line 19:	}
+Line 20:
+Line 21:	public void setX(float x) {
+Line 22:		this.x = x;
+Line 23:	}
+Line 24:
+Line 25:	public float getY() {
+Line 26:		return y;
+Line 27:	}
+Line 28:
+Line 29:	public void setY(float y) {
+Line 30:		this.y = y;
+Line 31:	}
+Line 32:
+Line 33:	@Override
+Line 34:	public boolean equals(Object other) {
+Line 35:		boolean result = false;
+Line 36:		if (other instanceof Coord) {
+Line 37:			Coord that = (Coord) other;
+Line 38:			boolean X = this.getX() == that.getX();
+Line 39:			boolean Y = this.getY() == that.getY();
+Line 40:			result = (X && Y);
+Line 41:		}
+Line 42:		return result;
+Line 43:	}
+Line 44:	
+Line 45:	public static void main(String[] args) {
+Line 46:		Coord cTwo = new Coord(1, 1);
+Line 47:		Coord cThree = new Coord(2, 1);
+Line 48:		
+Line 49:		boolean test = cTwo.equals(cThree);
+Line 50:		System.out.println(test);
+Line 51:	}
+Line 52:}
+Buggy Version
+Line 0:package WPI.CampusMap.AStar;
+Line 1:
+Line 2:public class Coord {
+Line 3:	private float x;
+Line 4:	private float y;
+Line 5:
+Line 6:	public Coord(float x, float y) {
+Line 7:		this.x = x;
+Line 8:		this.x = y;
+Line 9:	}
+Line 10:
+Line 11:	public float distance(Coord other) {
+Line 12:		return Math.abs( (float) (Math.sqrt(Math.pow(2, other.getY() + this.getY()) + Math.pow(2, other.getX() + this.getX()))));
+Line 13:
+Line 14:	}
+Line 15:
+Line 16:	public float getX() {
+Line 17:		return x;
+Line 18:	}
+Line 19:
+Line 20:	public void setX(float x) {
+Line 21:		this.x = x;
+Line 22:	}
+Line 23:
+Line 24:	public float getY() {
+Line 25:		return y;
+Line 26:	}
+Line 27:
+Line 28:	public void setY(float y) {
+Line 29:		this.y = y;
+Line 30:	}
+Line 31:
+Line 32:	public boolean equals(Coord other) {
+Line 33:		return ((this.getX() == other.getX()) && (this.getY() == other.getY()));
+Line 34:	}
+Line 35:}

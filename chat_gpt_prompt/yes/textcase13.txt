@@ -1,0 +1,37 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package pneumaticCraft.common.recipes;
+Line 1:
+Line 2:import pneumaticCraft.common.AchievementHandler;
+Line 3:import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+Line 4:import cpw.mods.fml.common.gameevent.PlayerEvent;
+Line 5:
+Line 6:public class CraftingHandler{
+Line 7:
+Line 8:    @SubscribeEvent
+Line 9:    public void onCrafting(PlayerEvent.ItemCraftedEvent event){
+Line 10:        if(event.player != null) {
+Line 11:            try {
+Line 12:                AchievementHandler.giveAchievement(event.player, event.crafting);
+Line 13:            } catch(Throwable e) {}
+Line 14:        }
+Line 15:    }
+Line 16:
+Line 17:}
+Buggy Version
+Line 0:package pneumaticCraft.common.recipes;
+Line 1:
+Line 2:import pneumaticCraft.common.AchievementHandler;
+Line 3:import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+Line 4:import cpw.mods.fml.common.gameevent.PlayerEvent;
+Line 5:
+Line 6:public class CraftingHandler{
+Line 7:
+Line 8:    @SubscribeEvent
+Line 9:    public void onCrafting(PlayerEvent.ItemCraftedEvent event){
+Line 10:        if(event.player != null) AchievementHandler.giveAchievement(event.player, event.crafting);
+Line 11:    }
+Line 12:
+Line 13:}

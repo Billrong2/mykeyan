@@ -1,0 +1,71 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package w094j.ctrl8.statement;
+Line 1:
+Line 2:import w094j.ctrl8.exception.ParseException;
+Line 3:import w094j.ctrl8.parse.CommandParser;
+Line 4:import w094j.ctrl8.parse.Parser;
+Line 5:import w094j.ctrl8.terminal.Terminal;
+Line 6:
+Line 7://@author A0112521B
+Line 8:/**
+Line 9: */
+Line 10:public class HelpStatement extends Statement {
+Line 11:
+Line 12:    private static CommandParser commandParser = Parser.getInstance()
+Line 13:            .getStatementParser().getCommandParser();
+Line 14:
+Line 15:    private CommandType command;
+Line 16:
+Line 17:    /**
+Line 18:     * @param statementString
+Line 19:     */
+Line 20:    public HelpStatement(String statementString) {
+Line 21:        super(CommandType.HELP, statementString);
+Line 22:        try {
+Line 23:            this.command = commandParser
+Line 24:                    .parse(this.getStatementArgumentsOnly());
+Line 25:        } catch (ParseException e) {
+Line 26:            this.command = CommandType.HELP;
+Line 27:        }
+Line 28:    }
+Line 29:
+Line 30:    @Override
+Line 31:    public void execute(Terminal terminal) {
+Line 32:        terminal.help(this.command);
+Line 33:    }
+Line 34:
+Line 35:}
+Buggy Version
+Line 0:package w094j.ctrl8.statement;
+Line 1:
+Line 2:import w094j.ctrl8.parse.CommandParser;
+Line 3:import w094j.ctrl8.parse.Parser;
+Line 4:import w094j.ctrl8.terminal.Terminal;
+Line 5:
+Line 6://@author A0112521B
+Line 7:/**
+Line 8: */
+Line 9:public class HelpStatement extends Statement {
+Line 10:
+Line 11:    private static CommandParser commandParser = Parser.getInstance()
+Line 12:            .getStatementParser().getCommandParser();
+Line 13:
+Line 14:    private CommandType command;
+Line 15:
+Line 16:    /**
+Line 17:     * @param statementString
+Line 18:     */
+Line 19:    public HelpStatement(String statementString) {
+Line 20:        super(CommandType.HELP, statementString);
+Line 21:        this.command = commandParser.parse(this.getStatementArgumentsOnly());
+Line 22:    }
+Line 23:
+Line 24:    @Override
+Line 25:    public void execute(Terminal terminal) {
+Line 26:        terminal.help(this.command);
+Line 27:    }
+Line 28:
+Line 29:}

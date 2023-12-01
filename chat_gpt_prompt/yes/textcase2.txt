@@ -1,0 +1,53 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package com.github.wenhao.stub.matcher;
+Line 1:
+Line 2:import com.github.wenhao.common.domain.Request;
+Line 3:import com.jayway.jsonpath.JsonPath;
+Line 4:import org.apache.commons.lang.StringUtils;
+Line 5:
+Line 6:import java.util.List;
+Line 7:
+Line 8:public class JsonPathMatcher implements RequestBodyMatcher {
+Line 9:
+Line 10:    @Override
+Line 11:    public boolean isApplicable(final Request stubRequest, final Request realRequest) {
+Line 12:        return realRequest.getContentType().contains("json") && stubRequest.getBody().startsWith("jsonPath:");
+Line 13:    }
+Line 14:
+Line 15:    @Override
+Line 16:    public boolean match(final Request stubRequest, final Request realRequest) {
+Line 17:        final String jsonPath = StringUtils.substringAfter(stubRequest.getBody(), "jsonPath:");
+Line 18:        try {
+Line 19:            final List result = JsonPath.parse(realRequest.getBody()).read(jsonPath, List.class);
+Line 20:            return result.size() != 0;
+Line 21:        } catch (Exception e) {
+Line 22:            return false;
+Line 23:        }
+Line 24:    }
+Line 25:}
+Buggy Version
+Line 0:package com.github.wenhao.stub.matcher;
+Line 1:
+Line 2:import com.github.wenhao.common.domain.Request;
+Line 3:import com.jayway.jsonpath.JsonPath;
+Line 4:import org.apache.commons.lang.StringUtils;
+Line 5:
+Line 6:import java.util.List;
+Line 7:
+Line 8:public class JsonPathMatcher implements RequestBodyMatcher {
+Line 9:
+Line 10:    @Override
+Line 11:    public boolean isApplicable(final Request stubRequest, final Request realRequest) {
+Line 12:        return realRequest.getContentType().contains("json") && stubRequest.getBody().startsWith("jsonPath:");
+Line 13:    }
+Line 14:
+Line 15:    @Override
+Line 16:    public boolean match(final Request stubRequest, final Request realRequest) {
+Line 17:        final String jsonPath = StringUtils.substringAfter(stubRequest.getBody(), "jsonPath:");
+Line 18:        final List result = JsonPath.parse(realRequest.getBody()).read(jsonPath, List.class);
+Line 19:        return result.size() != 0;
+Line 20:    }
+Line 21:}

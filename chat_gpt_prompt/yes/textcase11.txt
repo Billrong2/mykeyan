@@ -1,0 +1,65 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package warrenfalk.meldfs;
+Line 1:
+Line 2:import java.util.concurrent.atomic.AtomicInteger;
+Line 3:
+Line 4:
+Line 5:public class SourceOpRunner implements Runnable {
+Line 6:	final int index;
+Line 7:	final SourceFs source;
+Line 8:	final AtomicInteger sync;
+Line 9:	final SourceOp operation;
+Line 10:	
+Line 11:	public SourceOpRunner(SourceOp operation, int index, SourceFs source, AtomicInteger sync) {
+Line 12:		this.index = index;
+Line 13:		this.source = source;
+Line 14:		this.sync = sync;
+Line 15:		this.operation = operation;
+Line 16:	}
+Line 17:	
+Line 18:	@Override
+Line 19:	public void run() {
+Line 20:		try {
+Line 21:			operation.run(index, source);
+Line 22:		}
+Line 23:		finally {
+Line 24:			if (0 == sync.decrementAndGet()) {
+Line 25:				synchronized (sync) {
+Line 26:					sync.notify();
+Line 27:				}
+Line 28:			}
+Line 29:		}
+Line 30:	}
+Line 31:}
+Buggy Version
+Line 0:package warrenfalk.meldfs;
+Line 1:
+Line 2:import java.util.concurrent.atomic.AtomicInteger;
+Line 3:
+Line 4:
+Line 5:public class SourceOpRunner implements Runnable {
+Line 6:	final int index;
+Line 7:	final SourceFs source;
+Line 8:	final AtomicInteger sync;
+Line 9:	final SourceOp operation;
+Line 10:	
+Line 11:	public SourceOpRunner(SourceOp operation, int index, SourceFs source, AtomicInteger sync) {
+Line 12:		this.index = index;
+Line 13:		this.source = source;
+Line 14:		this.sync = sync;
+Line 15:		this.operation = operation;
+Line 16:	}
+Line 17:	
+Line 18:	@Override
+Line 19:	public void run() {
+Line 20:		operation.run(index, source);
+Line 21:		if (0 == sync.decrementAndGet()) {
+Line 22:			synchronized (sync) {
+Line 23:				sync.notify();
+Line 24:			}
+Line 25:		}
+Line 26:	}
+Line 27:}

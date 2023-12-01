@@ -1,0 +1,71 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:/* MoveIterator.java  */
+Line 1:
+Line 2:package player;
+Line 3:
+Line 4:import machine.*;
+Line 5:
+Line 6:/**
+Line 7: *  A public class for holding all the fields in a move.  This class is a
+Line 8: *  container for data, not an ADT; hence, all fields are public.
+Line 9: *
+Line 10: *  The moveKind field stores the type of move.  The x-coordinates index the
+Line 11: *  horizontal direction (left to right) and the y-coordinates index the
+Line 12: *  vertical direction (top to bottom).  x- and y-coordinates start at zero.
+Line 13: */
+Line 14:
+Line 15:public class MoveIterator extends Move{
+Line 16:	private Move[] possibleMoves = new Move[500];
+Line 17:	private int color;
+Line 18:	private int pointer = -1;
+Line 19:
+Line 20:	public MoveIterator(Board bd, int col){
+Line 21:		possibleMoves = LegalMoves.possibleMoves(bd, col);
+Line 22:		color = col;
+Line 23:	}
+Line 24:
+Line 25:	public Move getNext(){
+Line 26:		if(possibleMoves[pointer+1] != null){
+Line 27:			++pointer;
+Line 28:			return possibleMoves[pointer];			
+Line 29:		}
+Line 30:		else
+Line 31:			return null;		    
+Line 32:	}
+Line 33:
+Line 34:}Buggy Version
+Line 35:/* MoveIterator.java  */
+Line 36:
+Line 37:package player;
+Line 38:
+Line 39:import machine.*;
+Line 40:
+Line 41:/**
+Line 42: *  A public class for holding all the fields in a move.  This class is a
+Line 43: *  container for data, not an ADT; hence, all fields are public.
+Line 44: *
+Line 45: *  The moveKind field stores the type of move.  The x-coordinates index the
+Line 46: *  horizontal direction (left to right) and the y-coordinates index the
+Line 47: *  vertical direction (top to bottom).  x- and y-coordinates start at zero.
+Line 48: */
+Line 49:
+Line 50:public class MoveIterator extends Move{
+Line 51:	private Move[] possibleMoves = new Move[500];
+Line 52:	private int color;
+Line 53:	private int pointer = 0;
+Line 54:
+Line 55:	public MoveIterator(Board bd, int col){
+Line 56:		possibleMoves = LegalMoves.possibleMoves(bd, col);
+Line 57:		color = col;
+Line 58:	}
+Line 59:
+Line 60:	public Move getNext(){
+Line 61:		if(possibleMoves[pointer] != null){
+Line 62:			return possibleMoves[pointer];
+Line 63:			++pointer;
+Line 64:		}
+Line 65:	}
+Line 66:
+Line 67:}

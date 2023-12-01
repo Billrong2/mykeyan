@@ -1,0 +1,54 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package gr.tracer.platform;
+Line 1:
+Line 2:import org.osgi.framework.BundleActivator;
+Line 3:import org.osgi.framework.BundleContext;
+Line 4:
+Line 5:import eu.sqooss.core.AlitheiaCore;
+Line 6:
+Line 7:public class Activator implements BundleActivator {
+Line 8:
+Line 9:	@Override
+Line 10:	public void start(BundleContext context) throws Exception {
+Line 11:		try {
+Line 12:			AlitheiaCore core = AlitheiaCore.getInstance();
+Line 13:			
+Line 14:			if(core != null) {
+Line 15:				core.registerService(TracerPlatformService.class, TracerPlatformServiceImpl.class);
+Line 16:			}
+Line 17:			
+Line 18:		} catch(Exception e) {
+Line 19:			System.err.println(e);
+Line 20:		}
+Line 21:	}
+Line 22:
+Line 23:	@Override
+Line 24:	public void stop(BundleContext context) throws Exception {
+Line 25:		
+Line 26:	}
+Line 27:	
+Line 28:}
+Buggy Version
+Line 0:package gr.tracer.platform;
+Line 1:
+Line 2:import org.osgi.framework.BundleActivator;
+Line 3:import org.osgi.framework.BundleContext;
+Line 4:
+Line 5:import eu.sqooss.core.AlitheiaCore;
+Line 6:
+Line 7:public class Activator implements BundleActivator {
+Line 8:
+Line 9:	@Override
+Line 10:	public void start(BundleContext context) throws Exception {
+Line 11:		
+Line 12:	}
+Line 13:
+Line 14:	@Override
+Line 15:	public void stop(BundleContext context) throws Exception {
+Line 16:		
+Line 17:	}
+Line 18:	
+Line 19:}

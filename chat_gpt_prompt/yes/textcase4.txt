@@ -1,0 +1,59 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:/**********************************************************************
+Line 1: * Jhove - JSTOR/Harvard Object Validation Environment
+Line 2: * Copyright 2003 by JSTOR and the President and Fellows of Harvard College
+Line 3: **********************************************************************/
+Line 4:
+Line 5:package edu.harvard.hul.ois.jhove.module.pdf;
+Line 6:
+Line 7:/**
+Line 8: *  Class for Tokens which represent PDF names.
+Line 9: */
+Line 10:public class Name
+Line 11:    extends StringValuedToken
+Line 12:{
+Line 13:    /** Creates an instance of a Name */
+Line 14:    public Name ()
+Line 15:    {
+Line 16:        super ();
+Line 17:    }
+Line 18:    
+Line 19:    /** Returns true if it's within the PDF/A implementation limit */
+Line 20:    public boolean isPdfACompliant () {
+Line 21:        boolean compliant = false;
+Line 22:        try {
+Line 23:            compliant = _value.getBytes().length <= 127;
+Line 24:        } catch (StackOverflowError e)  {
+Line 25:            compliant = false;
+Line 26:        }
+Line 27:        return compliant; 
+Line 28:    }
+Line 29:}
+Buggy Version
+Line 0:/**********************************************************************
+Line 1: * Jhove - JSTOR/Harvard Object Validation Environment
+Line 2: * Copyright 2003 by JSTOR and the President and Fellows of Harvard College
+Line 3: **********************************************************************/
+Line 4:
+Line 5:package edu.harvard.hul.ois.jhove.module.pdf;
+Line 6:
+Line 7:/**
+Line 8: *  Class for Tokens which represent PDF names.
+Line 9: */
+Line 10:public class Name
+Line 11:    extends StringValuedToken
+Line 12:{
+Line 13:    /** Creates an instance of a Name */
+Line 14:    public Name ()
+Line 15:    {
+Line 16:        super ();
+Line 17:    }
+Line 18:    
+Line 19:    /** Returns true if it's within the PDF/A implementation limit */
+Line 20:    public boolean isPdfACompliant () {
+Line 21:        return _value.getBytes().length <= 127; 
+Line 22:    }
+Line 23:}

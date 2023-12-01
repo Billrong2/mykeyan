@@ -1,0 +1,66 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package com.vanhal.progressiveautomation.compat.mods;
+Line 1:
+Line 2:import net.minecraft.item.ItemStack;
+Line 3:
+Line 4:import com.vanhal.progressiveautomation.ProgressiveAutomation;
+Line 5:import com.vanhal.progressiveautomation.compat.BaseMod;
+Line 6:import org.apache.logging.log4j.Level;
+Line 7:import org.apache.logging.log4j.Logger;
+Line 8:
+Line 9:public class ThaumCraft extends BaseMod {
+Line 10:	
+Line 11:	public ThaumCraft() {
+Line 12:		modID = "Thaumcraft";
+Line 13:	}
+Line 14:	
+Line 15:	@Override
+Line 16:	public boolean isLog(ItemStack item) {
+Line 17:		if (item == null) return false;
+Line 18:		return (item.getUnlocalizedName().contains("tile.blockMagicalLog"));
+Line 19:	}
+Line 20:	
+Line 21:	@Override
+Line 22:	public boolean isLeaf(ItemStack item) {
+Line 23:		if (item == null) return false;
+Line 24:		Boolean rv = false;
+Line 25:		
+Line 26:		try {
+Line 27:			rv = item.getUnlocalizedName().contains("tile.blockMagicalLeaves");			
+Line 28:		} catch(java.lang.NullPointerException e) {
+Line 29:			ProgressiveAutomation.logger.warn("NullPointerException caught while calling ItemStack.getUnlocalizedName()");
+Line 30:		}
+Line 31:		return rv;
+Line 32:	}
+Line 33:	
+Line 34:}
+Buggy Version
+Line 0:package com.vanhal.progressiveautomation.compat.mods;
+Line 1:
+Line 2:import net.minecraft.item.ItemStack;
+Line 3:
+Line 4:import com.vanhal.progressiveautomation.ProgressiveAutomation;
+Line 5:import com.vanhal.progressiveautomation.compat.BaseMod;
+Line 6:
+Line 7:public class ThaumCraft extends BaseMod {
+Line 8:	
+Line 9:	public ThaumCraft() {
+Line 10:		modID = "Thaumcraft";
+Line 11:	}
+Line 12:	
+Line 13:	@Override
+Line 14:	public boolean isLog(ItemStack item) {
+Line 15:		if (item == null) return false;
+Line 16:		return (item.getUnlocalizedName().contains("tile.blockMagicalLog"));
+Line 17:	}
+Line 18:	
+Line 19:	@Override
+Line 20:	public boolean isLeaf(ItemStack item) {
+Line 21:		if (item == null) return false;
+Line 22:		return (item.getUnlocalizedName().contains("tile.blockMagicalLeaves"));
+Line 23:	}
+Line 24:	
+Line 25:}

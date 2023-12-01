@@ -1,0 +1,30 @@
+case0   =>13
+=>try { return (((Build.VERSION.SDK_INT) == 25) && ((Build.VERSION.PREVIEW_SDK_INT) > 0)) || ((Build.VERSION.SDK_INT) > 25); } catch (java.lang.Throwable e) { }
+case1   =>32
+=>return false
+case2   =>23
+=>return false
+case3   =>29
+=>return null
+case4   =>44
+=>return 0
+case5   =>26
+=>return age == 18
+case6   =>26
+=>return true
+case7   =>32
+=>return null
+case8   =>43
+=>return result
+case9   =>8
+=>return resolve(document.asDocumentLink())
+case10   =>32
+=>return null
+case11   =>25
+=>return document
+case12   =>27
+=>return threadPoolTaskExecutor
+case13   =>38
+=>return 1 / n2
+case14   =>18
+=>return ""

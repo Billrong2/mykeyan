@@ -1,0 +1,67 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blankFixed Version
+Line 0:package de.splashfish.util;
+Line 1:
+Line 2:import java.io.File;
+Line 3:
+Line 4:public class FileShift {
+Line 5:
+Line 6:	public static final int FROM_FILE 	= 0;
+Line 7:	public static final int TO_FILE		= 1;
+Line 8:	
+Line 9:	private File from;
+Line 10:	private File to;
+Line 11:	
+Line 12:	public FileShift(File from, File to) {
+Line 13:		this.from 	= from;
+Line 14:		this.to 	= to;
+Line 15:	}
+Line 16:	
+Line 17:	public File get(int i) {
+Line 18:		switch(i) {
+Line 19:			case 0: 	return from;	
+Line 20:			case 1: 	return to;		
+Line 21:			default: 	return null;
+Line 22:		}
+Line 23:	}
+Line 24:	
+Line 25:	@Override
+Line 26:	public boolean equals(Object obj) {
+Line 27:		if(obj instanceof FileShift) {
+Line 28:			FileShift shift = (FileShift) obj;
+Line 29:			return (from.equals(shift.get(FROM_FILE)) && to.equals(shift.get(TO_FILE)));
+Line 30:		}
+Line 31:		return false;
+Line 32:	}
+Line 33:}
+Buggy Version
+Line 0:package de.splashfish.util;
+Line 1:
+Line 2:import java.io.File;
+Line 3:
+Line 4:public class FileShift {
+Line 5:
+Line 6:	public static final int FROM_FILE 	= 0;
+Line 7:	public static final int TO_FILE		= 1;
+Line 8:	
+Line 9:	private File from;
+Line 10:	private File to;
+Line 11:	
+Line 12:	public FileShift(File from, File to) {
+Line 13:		this.from 	= from;
+Line 14:		this.to 	= to;
+Line 15:	}
+Line 16:	
+Line 17:	public File get(int i) {
+Line 18:		switch(i) {
+Line 19:			case 0: 	return from;	
+Line 20:			case 1: 	return to;		
+Line 21:			default: 	return null;
+Line 22:		}
+Line 23:	}
+Line 24:	
+Line 25:	public boolean equals(FileShift shift) {
+Line 26:		return (from.equals(shift.get(FROM_FILE)) && to.equals(shift.get(TO_FILE)));
+Line 27:	}
+Line 28:}

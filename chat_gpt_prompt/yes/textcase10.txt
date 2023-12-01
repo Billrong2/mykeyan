@@ -1,0 +1,51 @@
+I need you to detect the API misuse in my dataset. I will send you fixed version and buggy version of the code, tell me if there is API misuse or not. Provide your answer as in following format:
+1. If there are API misuses, response YES, otherwise say NO
+2. If the previous question is YES, then give me the API Misuse line number. If the previous question is NO, then leave it blank
+Fixed Version
+Line 0:package com.i906.mpt.internal;
+Line 1:
+Line 2:import com.google.firebase.FirebaseApp;
+Line 3:import com.google.firebase.crash.FirebaseCrash;
+Line 4:
+Line 5:/**
+Line 6: * @author Noorzaini Ilhami
+Line 7: */
+Line 8:public class FirebaseTree extends BaseMptTree {
+Line 9:
+Line 10:    @Override
+Line 11:    protected void log(int priority, String tag, String message, Throwable t) {
+Line 12:        try {
+Line 13:            FirebaseApp.getInstance();
+Line 14:        } catch (IllegalStateException e) {
+Line 15:            // Skip logging if Firebase not initialized
+Line 16:            return;
+Line 17:        }
+Line 18:
+Line 19:        if (t != null) {
+Line 20:            if (!shouldReport(t)) return;
+Line 21:            FirebaseCrash.report(t);
+Line 22:        } else {
+Line 23:            FirebaseCrash.log(message);
+Line 24:        }
+Line 25:    }
+Line 26:}
+Buggy Version
+Line 0:package com.i906.mpt.internal;
+Line 1:
+Line 2:import com.google.firebase.crash.FirebaseCrash;
+Line 3:
+Line 4:/**
+Line 5: * @author Noorzaini Ilhami
+Line 6: */
+Line 7:public class FirebaseTree extends BaseMptTree {
+Line 8:
+Line 9:    @Override
+Line 10:    protected void log(int priority, String tag, String message, Throwable t) {
+Line 11:        if (t != null) {
+Line 12:            if (!shouldReport(t)) return;
+Line 13:            FirebaseCrash.report(t);
+Line 14:        } else {
+Line 15:            FirebaseCrash.log(message);
+Line 16:        }
+Line 17:    }
+Line 18:}
