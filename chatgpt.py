@@ -172,7 +172,7 @@ from openai import AzureOpenAI
 client = AzureOpenAI(
   api_key = os.getenv("TOKEN"),  
   api_version = "2023-05-15",
-  azure_endpoint = os.getenv("https://tien.openai.azure.com/")
+  azure_endpoint = os.getenv("ENDPOIND")
 )
 user_prompt = [
  {"role": "user", "content": "Tell me a joke"}]
