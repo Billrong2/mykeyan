@@ -170,7 +170,7 @@ with open("/Users/xiaokairong/Desktop/mykeyan/chat_gpt_prompt/no.txt", 'w') as f
 import os
 from openai import AzureOpenAI
 client = AzureOpenAI(
-  api_key = os.getenv("ac0ff6efccd14d95a0ec5ecc1c775df4"),  
+  api_key = os.getenv("TOKEN"),  
   api_version = "2023-05-15",
   azure_endpoint = os.getenv("https://tien.openai.azure.com/")
 )
